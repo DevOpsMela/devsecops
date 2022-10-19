@@ -15,6 +15,21 @@ pipeline {
                 sh 'jenkins --version'
             }
         }
+
+        stage('Docker Version - Check') {
+            steps {
+                echo "Docker Version - Check"
+                sh 'docker --version'
+            }
+        }
+
+        stage('Kubernetes Version - Check') {
+            steps {
+                withKubeConfig([credentialsId: 'kube-config']) {
+                echo "Kubernetes Version - Check"
+                sh 'kubectl version --short'
+               }
+           } 
+        }
     }
  }
-
