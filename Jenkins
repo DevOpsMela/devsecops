@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Maven Version - Checks') {
+        stage('Maven Version - Check') {
             steps {
                 echo "Maven Version - Check"
                 sh 'mvn -v'
