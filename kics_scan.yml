@@ -1,0 +1,11 @@
+steps:
+      # Design to fail the pipeline on results error found and export the report in both json and SARIF format.
+      - script: |
+          /app/bin/kics scan --ci -p ${PWD} -o ${PWD} --report-formats json,sarif --ignore-on-exit results --exclude-paths 'you can put excluded file here.'
+          cat results.json
+
+      # Scan results should be visible in the SARIF viewer tab of the build.
+      - task: PublishBuildArtifacts@1
+        inputs:
+          pathToPublish: $(System.DefaultWorkingDirectory)/results.sarif
+          artifactName: CodeAnalysisLogs
